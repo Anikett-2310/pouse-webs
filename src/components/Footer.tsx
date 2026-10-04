@@ -20,7 +20,7 @@ export default function Footer() {
                 <Link href="/how-it-works">How It Works</Link>
               </li>
               <li>
-                <Link href="/security">Security &amp; Privacy</Link>
+                <Link href="/security">Security & Privacy</Link>
               </li>
               <li>
                 <Link href="/download?tab=cli">CLI Tool (pouse-cli)</Link>
@@ -72,7 +72,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Source code on GitHub &nearr;
+                  Source code on GitHub ↗
                 </a>
               </li>
               <li>
@@ -81,7 +81,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Issue Tracker &nearr;
+                  Issue Tracker ↗
                 </a>
               </li>
               <li>

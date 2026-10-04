@@ -2,27 +2,22 @@
 
 import ScreenshotFrame from './ScreenshotFrame';
 
-interface UtilityPill {
-  label: string;
-  keycap: string;
-}
-
-const ROW_1_PILLS: UtilityPill[] = [
-  { label: 'Volume', keycap: 'Vol +/-' },
-  { label: 'Mute', keycap: 'Vol Mute' },
-  { label: 'Brightness', keycap: 'WMI / DDC/CI' },
-  { label: 'Windows Search', keycap: 'Win+S' },
-  { label: 'Task View', keycap: 'Win+Tab' },
-  { label: 'Show Desktop', keycap: 'Win+D' },
+const pills = [
+  { label: 'Volume', key: 'Vol +/-' },
+  { label: 'Mute', key: 'Vol Mute' },
+  { label: 'Brightness', key: 'WMI / DDC/CI' },
+  { label: 'Windows Search', key: 'Win+S' },
+  { label: 'Task View', key: 'Win+Tab' },
+  { label: 'Show Desktop', key: 'Win+D' },
 ];
 
-const ROW_2_PILLS: UtilityPill[] = [
-  { label: 'Taskbar Apps', keycap: 'Win+T' },
-  { label: 'App Switcher', keycap: 'Alt+Tab' },
-  { label: 'Soft Keyboard', keycap: 'UTF-8' },
-  { label: 'Gesture Cheatsheet', keycap: 'Popup' },
-  { label: 'Volume', keycap: 'Vol +/-' },
-  { label: 'Mute', keycap: 'Vol Mute' },
+const pills2 = [
+  { label: 'Taskbar Apps', key: 'Win+T' },
+  { label: 'App Switcher', key: 'Alt+Tab' },
+  { label: 'Soft Keyboard', key: 'UTF-8' },
+  { label: 'Gesture Cheatsheet', key: 'Popup' },
+  { label: 'Volume', key: 'Vol +/-' },
+  { label: 'Mute', key: 'Vol Mute' },
 ];
 
 export default function UtilitiesSection() {
@@ -34,41 +29,48 @@ export default function UtilitiesSection() {
             <b>02</b> Companion Tools
           </span>
           <h2 className="reveal" style={{ maxWidth: '100%', margin: '0 auto 16px', fontWeight: 800 }}>
-            Utilities &amp; Instant Shortcuts
+            Utilities & Instant Shortcuts
           </h2>
           <p className="sub reveal" style={{ margin: '0 auto 48px', maxWidth: '38em' }}>
             Utility controls live in a collapsible bar at the top of your mobile screen, keeping essential PC actions at your fingertips without switching modes.
           </p>
         </div>
 
-        {/* Row 1 */}
-        <div className="marquee-outer" aria-label="Quick shortcut pills">
-          <div className="marquee-track">
-            {ROW_1_PILLS.map((pill, idx) => (
-              <span key={`r1-a-${idx}`} className="pill">
-                {pill.label} <span className="keycap">{pill.keycap}</span>
-              </span>
-            ))}
-            {ROW_1_PILLS.map((pill, idx) => (
-              <span key={`r1-b-${idx}`} className="pill" aria-hidden="true">
-                {pill.label} <span className="keycap">{pill.keycap}</span>
-              </span>
+        {/* Row 1 — forward */}
+        <div style={{
+          overflow: 'hidden',
+          width: '100%',
+          WebkitMaskImage: 'linear-gradient(90deg, transparent 0px, black 80px, black calc(100% - 80px), transparent 100%)',
+          maskImage: 'linear-gradient(90deg, transparent 0px, black 80px, black calc(100% - 80px), transparent 100%)',
+        }}>
+          <div style={{
+            display: 'flex',
+            width: 'max-content',
+            gap: '10px',
+            animation: 'marquee-fwd 35s linear infinite',
+          }}>
+            {[...pills, ...pills].map((pill, i) => (
+              <span key={i} className="pill">{pill.label} <span className="keycap">{pill.key}</span></span>
             ))}
           </div>
         </div>
 
-        {/* Row 2 */}
-        <div className="marquee-outer" style={{ marginTop: '10px' }}>
-          <div className="marquee-track rev">
-            {ROW_2_PILLS.map((pill, idx) => (
-              <span key={`r2-a-${idx}`} className="pill">
-                {pill.label} <span className="keycap">{pill.keycap}</span>
-              </span>
-            ))}
-            {ROW_2_PILLS.map((pill, idx) => (
-              <span key={`r2-b-${idx}`} className="pill" aria-hidden="true">
-                {pill.label} <span className="keycap">{pill.keycap}</span>
-              </span>
+        {/* Row 2 — reverse */}
+        <div style={{
+          overflow: 'hidden',
+          width: '100%',
+          marginTop: '10px',
+          WebkitMaskImage: 'linear-gradient(90deg, transparent 0px, black 80px, black calc(100% - 80px), transparent 100%)',
+          maskImage: 'linear-gradient(90deg, transparent 0px, black 80px, black calc(100% - 80px), transparent 100%)',
+        }}>
+          <div style={{
+            display: 'flex',
+            width: 'max-content',
+            gap: '10px',
+            animation: 'marquee-fwd 35s linear infinite reverse',
+          }}>
+            {[...pills2, ...pills2].map((pill, i) => (
+              <span key={i} className="pill">{pill.label} <span className="keycap">{pill.key}</span></span>
             ))}
           </div>
         </div>
@@ -83,7 +85,7 @@ export default function UtilitiesSection() {
                 <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
               </svg>
             </div>
-            <h3>PC Audio &amp; Brightness</h3>
+            <h3>PC Audio & Brightness</h3>
             <p className="card-intro">Directly adjust system parameters from your phone:</p>
             <ul className="card-bullets">
               <li>Volume Up, Volume Down, Volume Mute</li>
@@ -106,7 +108,7 @@ export default function UtilitiesSection() {
             <p className="card-intro">Trigger standard Windows productivity shortcuts:</p>
             <ul className="card-bullets">
               <li>
-                <strong>Task View</strong> <span className="keycap">Win+Tab</span> overview of virtual desktops &amp; windows
+                <strong>Task View</strong> <span className="keycap">Win+Tab</span> overview of virtual desktops & windows
               </li>
               <li>
                 <strong>Taskbar Apps</strong> <span className="keycap">Win+T</span> cycles through pinned taskbar apps
@@ -131,7 +133,7 @@ export default function UtilitiesSection() {
                 <line x1="12" y1="18" x2="12.01" y2="18" />
               </svg>
             </div>
-            <h3>Soft Keyboard &amp; Pairing</h3>
+            <h3>Soft Keyboard & Pairing</h3>
             <p className="card-intro">Quick text entry and connection maintenance:</p>
             <ul className="card-bullets">
               <li>Type full UTF-8 text strings directly into active PC fields</li>

@@ -22,7 +22,7 @@ export default function UpdatesPage() {
                 Version 1.0.0: The foundation release
               </p>
               <p style={{ color: 'var(--mut)', margin: '0 0 24px', fontSize: '15px' }}>
-                Released October 2026 &bull; Initial public release for Windows and Android
+                Released October 2026 • Initial public release for Windows and Android
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '28px', borderTop: '1px solid var(--line)', paddingTop: '28px' }}>

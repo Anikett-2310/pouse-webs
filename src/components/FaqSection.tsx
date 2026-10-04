@@ -125,7 +125,7 @@ export default function FaqSection({ limit, showAllLink = false }: FaqSectionPro
           {showAllLink && (
             <div style={{ textAlign: 'center', marginTop: '28px' }}>
               <Link className="btn" href="/faq">
-                See all questions &rarr;
+                See all questions →
               </Link>
             </div>
           )}
@@ -143,7 +143,7 @@ export default function FaqSection({ limit, showAllLink = false }: FaqSectionPro
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Open an issue on GitHub &nearr;
+                Open an issue on GitHub ↗
               </a>
             </div>
           </div>

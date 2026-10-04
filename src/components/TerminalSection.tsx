@@ -156,7 +156,7 @@ export default function TerminalSection({ showSecondary = false }: TerminalSecti
             </p>
             <div style={{ marginTop: '28px' }}>
               <Link className="btn btn-terminal-doc" href="/download?tab=cli">
-                Read CLI Documentation &rarr;
+                Read CLI Documentation →
               </Link>
             </div>
           </div>
@@ -165,27 +165,29 @@ export default function TerminalSection({ showSecondary = false }: TerminalSecti
           <div className="terminal-right-col" ref={terminalRef}>
             <div className="terminal-window reveal" role="region" aria-label="Interactive CLI Terminal Simulator">
               {/* Window Title Bar */}
-              <div className="terminal-titlebar">
-                <div className="terminal-dots" aria-hidden="true">
-                  <span className="dot dot-red">
-                    <span className="dot-glyph">×</span>
-                  </span>
-                  <span className="dot dot-yellow">
-                    <span className="dot-glyph">−</span>
-                  </span>
-                  <span className="dot dot-green">
-                    <span className="dot-glyph">⤢</span>
-                  </span>
+              <div style={{
+                background: 'linear-gradient(180deg,#1a0f35,#120a28)',
+                height: '44px',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0 16px',
+                borderBottom: '1px solid rgba(255,255,255,0.07)',
+              }}>
+                <div style={{display:'flex',gap:'6px',alignItems:'center'}}>
+                  <div style={{width:'12px',height:'12px',borderRadius:'50%',background:'#ff5f57',flexShrink:0}} title="Close" />
+                  <div style={{width:'12px',height:'12px',borderRadius:'50%',background:'#febc2e',flexShrink:0}} title="Minimize" />
+                  <div style={{width:'12px',height:'12px',borderRadius:'50%',background:'#28c840',flexShrink:0}} title="Maximize" />
                 </div>
-                <div className="terminal-title">
+                <span style={{flex:1,textAlign:'center',fontFamily:'JetBrains Mono, monospace',fontSize:'12.5px',color:'#6b6490'}}>
                   Windows Terminal (PowerShell / Command Prompt)
-                </div>
-                <button
-                  type="button"
-                  className="terminal-copy-btn"
-                  onClick={handleCopy}
-                  aria-label="Copy terminal commands to clipboard"
-                >
+                </span>
+                <button onClick={handleCopy} style={{
+                  fontFamily: 'Figtree, sans-serif', fontWeight: 600, fontSize: '12px',
+                  padding: '5px 14px', borderRadius: '99px',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  background: '#1e1040', color: '#f6f2ff', cursor: 'pointer',
+                  outline: 'none', boxShadow: 'none',
+                }}>
                   {copied ? 'Copied ✓' : 'Copy'}
                 </button>
               </div>
@@ -248,7 +250,7 @@ export default function TerminalSection({ showSecondary = false }: TerminalSecti
                         <span className="dot-glyph">⤢</span>
                       </span>
                     </div>
-                    <div className="terminal-title">Windows Terminal (Update &amp; Removal)</div>
+                    <div className="terminal-title">Windows Terminal (Update & Removal)</div>
                   </div>
                   <div className="terminal-body" style={{ minHeight: 'auto', padding: '24px 28px' }}>
                     <div className="terminal-line" style={{ color: 'var(--mut)', marginBottom: '8px' }}>
@@ -275,7 +277,7 @@ export default function TerminalSection({ showSecondary = false }: TerminalSecti
                       <rect width="16" height="16" rx="3" fill="#CB3837" />
                       <path d="M3 3H13V13H8V5.5H5.5V13H3V3Z" fill="white" />
                     </svg>
-                    <span>Published on npm &bull; pouse-cli</span>
+                    <span>Published on npm • pouse-cli</span>
                   </a>
                 </div>
               </div>
