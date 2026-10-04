@@ -4,6 +4,8 @@ import { bricolage, instrumentSerif, figtree, jetbrainsMono } from './fonts';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import ProgressBar from '@/components/ProgressBar';
+import BackgroundLayers from '@/components/BackgroundLayers';
+import ScrollRevealProvider from '@/components/ScrollRevealProvider';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://pouse.app'),
@@ -51,7 +53,8 @@ export default function RootLayout({
       className={`${bricolage.variable} ${instrumentSerif.variable} ${figtree.variable} ${jetbrainsMono.variable}`}
     >
       <body>
-        <div className="bg-grid" aria-hidden="true" />
+        <BackgroundLayers />
+        <ScrollRevealProvider />
         <ProgressBar />
         <Nav />
         <main>{children}</main>

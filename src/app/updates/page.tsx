@@ -11,7 +11,7 @@ export default function UpdatesPage() {
     <div>
       <section style={{ paddingTop: 'clamp(48px, 8vw, 90px)' }}>
         <div className="wrap">
-          <h2>Updates & changelog.</h2>
+          <h2 className="reveal">Updates & changelog.</h2>
           <p className="sub">
             Track release milestones, protocol enhancements, and client improvements across the platform.
           </p>

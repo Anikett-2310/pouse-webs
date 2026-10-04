@@ -82,7 +82,7 @@ export default function FaqSection({ limit, showAllLink = false }: FaqSectionPro
             <span className="num">07</span>
             <span className="label">FAQ</span>
           </div>
-          <h2 style={{ maxWidth: '100%', margin: '0 auto 16px', fontWeight: 800 }}>
+          <h2 className="reveal" style={{ maxWidth: '100%', margin: '0 auto 16px', fontWeight: 800 }}>
             Frequently Asked Questions
           </h2>
           <p className="sub" style={{ margin: '0 auto', maxWidth: '38em' }}>
@@ -98,7 +98,8 @@ export default function FaqSection({ limit, showAllLink = false }: FaqSectionPro
               return (
                 <div
                   key={idx}
-                  className={`faq-card ${isOpen ? 'open' : ''}`}
+                  className={`faq-card glass-card reveal ${isOpen ? 'open' : ''}`}
+                  style={{ transitionDelay: `${idx * 0.12}s` }}
                 >
                   <button
                     type="button"
@@ -130,7 +131,7 @@ export default function FaqSection({ limit, showAllLink = false }: FaqSectionPro
           )}
 
           {/* Issue Box */}
-          <div className="faq-issue-box">
+          <div className="faq-issue-box glass-card reveal" style={{ transitionDelay: '0.2s' }}>
             <h3>Have a technical issue or bug report?</h3>
             <p>
               Check out the public issue tracker on GitHub to report issues, request features, or review the codebase.

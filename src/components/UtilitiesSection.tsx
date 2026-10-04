@@ -7,17 +7,22 @@ interface UtilityPill {
   keycap: string;
 }
 
-const PILLS: UtilityPill[] = [
+const ROW_1_PILLS: UtilityPill[] = [
   { label: 'Volume', keycap: 'Vol +/-' },
   { label: 'Mute', keycap: 'Vol Mute' },
   { label: 'Brightness', keycap: 'WMI / DDC/CI' },
   { label: 'Windows Search', keycap: 'Win+S' },
   { label: 'Task View', keycap: 'Win+Tab' },
   { label: 'Show Desktop', keycap: 'Win+D' },
+];
+
+const ROW_2_PILLS: UtilityPill[] = [
   { label: 'Taskbar Apps', keycap: 'Win+T' },
   { label: 'App Switcher', keycap: 'Alt+Tab' },
   { label: 'Soft Keyboard', keycap: 'UTF-8' },
   { label: 'Gesture Cheatsheet', keycap: 'Popup' },
+  { label: 'Volume', keycap: 'Vol +/-' },
+  { label: 'Mute', keycap: 'Vol Mute' },
 ];
 
 export default function UtilitiesSection() {
@@ -29,7 +34,7 @@ export default function UtilitiesSection() {
             <span className="num">02</span>
             <span className="label">COMPANION TOOLS</span>
           </div>
-          <h2 style={{ maxWidth: '100%', margin: '0 auto 16px', fontWeight: 800 }}>
+          <h2 className="reveal" style={{ maxWidth: '100%', margin: '0 auto 16px', fontWeight: 800 }}>
             Utilities & Instant Shortcuts
           </h2>
           <p className="sub" style={{ margin: '0 auto', maxWidth: '38em' }}>
@@ -37,30 +42,53 @@ export default function UtilitiesSection() {
           </p>
         </div>
 
-        {/* Scrolling pill marquee */}
-        <div className="pill-marquee-wrap" aria-label="Quick shortcut pills">
-          <div className="pill-marquee-track">
-            {/* First set */}
-            {PILLS.map((pill, idx) => (
-              <div key={`p1-${idx}`} className="pill-item">
-                <span>{pill.label}</span>
-                <span className="keycap">{pill.keycap}</span>
-              </div>
-            ))}
-            {/* Duplicate set for seamless infinite loop */}
-            {PILLS.map((pill, idx) => (
-              <div key={`p2-${idx}`} className="pill-item" aria-hidden="true">
-                <span>{pill.label}</span>
-                <span className="keycap">{pill.keycap}</span>
-              </div>
-            ))}
+        {/* Zigzag Scrolling Pills Marquee (Row 1 Left->Right, Row 2 Right->Left) */}
+        <div className="zigzag-marquee-container" aria-label="Quick shortcut pills">
+          {/* Row 1: Forward (Left to Right) */}
+          <div className="zigzag-row">
+            <div className="zigzag-track zigzag-forward">
+              {/* Set 1 */}
+              {ROW_1_PILLS.map((pill, idx) => (
+                <div key={`r1-a-${idx}`} className="pill-item">
+                  <span>{pill.label}</span>
+                  <span className="keycap">{pill.keycap}</span>
+                </div>
+              ))}
+              {/* Set 2 (duplicate for seamless loop) */}
+              {ROW_1_PILLS.map((pill, idx) => (
+                <div key={`r1-b-${idx}`} className="pill-item" aria-hidden="true">
+                  <span>{pill.label}</span>
+                  <span className="keycap">{pill.keycap}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2: Backward (Right to Left) */}
+          <div className="zigzag-row">
+            <div className="zigzag-track zigzag-backward">
+              {/* Set 1 */}
+              {ROW_2_PILLS.map((pill, idx) => (
+                <div key={`r2-a-${idx}`} className="pill-item">
+                  <span>{pill.label}</span>
+                  <span className="keycap">{pill.keycap}</span>
+                </div>
+              ))}
+              {/* Set 2 (duplicate for seamless loop) */}
+              {ROW_2_PILLS.map((pill, idx) => (
+                <div key={`r2-b-${idx}`} className="pill-item" aria-hidden="true">
+                  <span>{pill.label}</span>
+                  <span className="keycap">{pill.keycap}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Three glass cards */}
+        {/* Three glass cards with staggered scroll reveal */}
         <div className="cards-grid-3">
           {/* Card 1: Audio & Brightness */}
-          <div className="glass-card utility-card">
+          <div className="glass-card utility-card reveal" style={{ transitionDelay: '0s' }}>
             <div className="icon-tile" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
@@ -78,7 +106,7 @@ export default function UtilitiesSection() {
           </div>
 
           {/* Card 2: Windows Navigation */}
-          <div className="glass-card utility-card">
+          <div className="glass-card utility-card reveal" style={{ transitionDelay: '0.12s' }}>
             <div className="icon-tile" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="3" width="20" height="14" rx="2" />
@@ -108,19 +136,11 @@ export default function UtilitiesSection() {
           </div>
 
           {/* Card 3: Soft Keyboard & Pairing */}
-          <div className="glass-card utility-card">
+          <div className="glass-card utility-card reveal" style={{ transitionDelay: '0.24s' }}>
             <div className="icon-tile" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="4" width="20" height="16" rx="2" />
-                <line x1="6" y1="8" x2="6" y2="8" />
-                <line x1="10" y1="8" x2="10" y2="8" />
-                <line x1="14" y1="8" x2="14" y2="8" />
-                <line x1="18" y1="8" x2="18" y2="8" />
-                <line x1="6" y1="12" x2="6" y2="12" />
-                <line x1="10" y1="12" x2="10" y2="12" />
-                <line x1="14" y1="12" x2="14" y2="12" />
-                <line x1="18" y1="12" x2="18" y2="12" />
-                <line x1="8" y1="16" x2="16" y2="16" />
+                <rect x="4" y="2" width="16" height="20" rx="2" />
+                <line x1="12" y1="18" x2="12.01" y2="18" />
               </svg>
             </div>
             <h3>Soft Keyboard & Pairing</h3>
@@ -128,12 +148,7 @@ export default function UtilitiesSection() {
             <ul className="card-bullets">
               <li>Type full UTF-8 text strings directly into active PC fields</li>
               <li>
-                Dedicated keys:{' '}
-                <span className="keycap">Enter</span>{' '}
-                <span className="keycap">Backspace</span>{' '}
-                <span className="keycap">Space</span>{' '}
-                <span className="keycap">Tab</span>{' '}
-                <span className="keycap">Esc</span>
+                Dedicated keys: <span className="keycap">Enter</span>, <span className="keycap">Backspace</span>, <span className="keycap">Space</span>, <span className="keycap">Tab</span>, <span className="keycap">Esc</span>
               </li>
               <li>Gesture cheatsheet popup for quick gesture reference</li>
               <li>QR code scanner and manual IP pairing inputs</li>
@@ -141,12 +156,12 @@ export default function UtilitiesSection() {
           </div>
         </div>
 
-        {/* Centered phone showcase below cards */}
-        <div style={{ marginTop: '56px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ width: '100%', maxWidth: '320px' }}>
+        {/* Centered phone frame showing utilities dock */}
+        <div style={{ marginTop: '56px', display: 'flex', justifyContent: 'center' }}>
+          <div className="phone-frame reveal">
             <ScreenshotFrame
               name="utilities-dock"
-              alt="Pouse utility dock on phone screen showing quick controls"
+              alt="Pouse utilities dock on mobile phone"
             />
           </div>
         </div>

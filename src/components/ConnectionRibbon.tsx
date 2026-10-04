@@ -33,7 +33,7 @@ export default function ConnectionRibbon() {
   return (
     <svg
       ref={svgRef}
-      className="ribbon"
+      className="ribbon reveal"
       id="rib"
       viewBox="0 0 1000 150"
       aria-hidden="true"

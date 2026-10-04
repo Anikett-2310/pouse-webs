@@ -11,7 +11,7 @@ export default function AboutPage() {
     <div>
       <section style={{ paddingTop: 'clamp(48px, 8vw, 90px)' }}>
         <div className="wrap">
-          <h2>The story of Pouse.</h2>
+          <h2 className="reveal">The story of Pouse.</h2>
           <p className="sub">
             Why we built a multi-modal wireless input platform instead of another basic trackpad app.
           </p>

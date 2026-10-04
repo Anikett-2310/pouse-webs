@@ -13,7 +13,7 @@ export default function FeaturesPage() {
     <div>
       <section style={{ paddingTop: 'clamp(48px, 8vw, 90px)' }}>
         <div className="wrap">
-          <h2>Five ways to point.</h2>
+          <h2 className="reveal">Five ways to point.</h2>
           <p className="sub">
             Every mode shares the same Windows client and protocol. Touch, tilt, wave, tap, or stream your desktop directly to your pocket.
           </p>
@@ -21,7 +21,7 @@ export default function FeaturesPage() {
           <ModeSwitcher />
 
           <div style={{ marginTop: '80px', borderTop: '1px solid var(--line)', paddingTop: '60px' }}>
-            <h2>Inside each mode.</h2>
+            <h2 className="reveal">Inside each mode.</h2>
             <p className="sub">
               Engineered for natural interaction with zero added PC drivers.
             </p>
@@ -102,6 +102,9 @@ export default function FeaturesPage() {
           </div>
         </div>
       </section>
+
+      {/* Section Divider */}
+      <div className="section-divider" aria-hidden="true" />
 
       {/* Utilities Section */}
       <UtilitiesSection />

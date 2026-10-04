@@ -3,32 +3,16 @@ import Link from 'next/link';
 export default function Footer() {
   return (
     <footer className="site-footer">
-      <div className="wrap">
-        <div className="footer-top-grid">
-          {/* Brand info column */}
-          <div className="footer-brand-col">
-            <Link className="brand" href="/" style={{ marginBottom: '14px', display: 'inline-flex' }}>
-              <img
-                src="/assets/pouse-logo.png"
-                alt="Pouse logo"
-                width={30}
-                height={30}
-              />
-              <span>Pouse</span>
-              <span className="version-pill">v1.0.0</span>
-            </Link>
-            <p className="footer-desc">
-              Pocket Mouse platform converting an Android phone into a multi-mode wireless input device for Windows 10/11.
-            </p>
-            <p className="footer-telemetry-note">
-              This website and the CLI collect zero telemetry and run no tracking scripts.
-            </p>
-          </div>
+      {/* Faint violet glow behind the footer area */}
+      <div className="footer-glow" aria-hidden="true" />
 
-          {/* Product links */}
-          <div className="footer-col">
-            <h4>PRODUCT</h4>
-            <ul>
+      <div className="wrap">
+        {/* Three columns */}
+        <div className="footer-three-cols">
+          {/* Column 1: Product */}
+          <div className="footer-col reveal" style={{ transitionDelay: '0s' }}>
+            <h4 className="footer-col-heading">PRODUCT</h4>
+            <ul className="footer-links">
               <li>
                 <Link href="/features">All 5 Input Modes</Link>
               </li>
@@ -36,10 +20,10 @@ export default function Footer() {
                 <Link href="/how-it-works">How It Works</Link>
               </li>
               <li>
-                <Link href="/security">Security & Privacy</Link>
+                <Link href="/security">Security &amp; Privacy</Link>
               </li>
               <li>
-                <Link href="/download">CLI Tool (pouse-cli)</Link>
+                <Link href="/download?tab=cli">CLI Tool (pouse-cli)</Link>
               </li>
               <li>
                 <Link href="/faq">Frequently Asked Questions</Link>
@@ -47,10 +31,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Downloads links */}
-          <div className="footer-col">
-            <h4>DOWNLOADS</h4>
-            <ul>
+          {/* Column 2: Downloads */}
+          <div className="footer-col reveal" style={{ transitionDelay: '0.1s' }}>
+            <h4 className="footer-col-heading">DOWNLOADS</h4>
+            <ul className="footer-links">
               <li>
                 <Link href="/download">Download Center</Link>
               </li>
@@ -64,7 +48,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <span style={{ color: 'var(--dim)' }}>Android Mobile App (soon)</span>
+                <span className="footer-dim-item">Android Mobile App (coming soon)</span>
               </li>
               <li>
                 <a
@@ -78,10 +62,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Repository links */}
-          <div className="footer-col">
-            <h4>REPOSITORY</h4>
-            <ul>
+          {/* Column 3: Repository */}
+          <div className="footer-col reveal" style={{ transitionDelay: '0.2s' }}>
+            <h4 className="footer-col-heading">REPOSITORY</h4>
+            <ul className="footer-links">
               <li>
                 <a
                   href="https://github.com/Anikett-2310/Pouse"
@@ -105,19 +89,26 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/Anikett-2310/Pouse/blob/main/LICENSE"
+                  href="https://github.com/Anikett-2310/Pouse"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  License: MIT
+                  License: TBD
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom copyright bar */}
-        <div className="footer-bottom-bar">
+        {/* Centered zero telemetry note */}
+        <div className="footer-telemetry-strip reveal" style={{ transitionDelay: '0.25s' }}>
+          <p className="footer-telemetry-text">
+            This website and the CLI collect zero telemetry and run no tracking scripts.
+          </p>
+        </div>
+
+        {/* Bottom copyright line with author link on the right */}
+        <div className="footer-bottom-bar reveal" style={{ transitionDelay: '0.3s' }}>
           <p className="copyright-text">
             &copy; 2026 Pouse. Windows is a trademark of Microsoft Corporation. Android is a trademark of Google LLC.
           </p>

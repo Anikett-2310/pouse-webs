@@ -18,7 +18,7 @@ export default function SecurityPage() {
           <SecuritySay />
 
           <div style={{ marginTop: '90px', borderTop: '1px solid var(--line)', paddingTop: '60px', maxWidth: '840px' }}>
-            <h2>The three-layer security model.</h2>
+            <h2 className="reveal">The three-layer security model.</h2>
             <p className="sub">
               Your computer controls your mouse and keyboard. We treat that privilege with defense-in-depth protection.
             </p>

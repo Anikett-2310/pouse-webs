@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import DownloadTabs from '@/components/DownloadTabs';
 
 export const metadata: Metadata = {
@@ -12,15 +13,21 @@ export default function DownloadPage() {
     <div>
       <section style={{ paddingTop: 'clamp(48px, 8vw, 90px)' }}>
         <div className="wrap">
-          <h2>Get Pouse.</h2>
+          <div className="eyebrow">
+            <span className="num">04</span>
+            <span className="label">DOWNLOAD</span>
+          </div>
+          <h2 className="reveal">Get Pouse.</h2>
           <p className="sub">
             Install the PC client first, then the phone app. Prefer a terminal? The CLI handles the Windows install for you.
           </p>
 
-          <DownloadTabs showScreenshots />
+          <Suspense fallback={<div style={{ minHeight: '300px' }} />}>
+            <DownloadTabs showScreenshots />
+          </Suspense>
 
           <div style={{ marginTop: '80px', borderTop: '1px solid var(--line)', paddingTop: '60px', maxWidth: '800px' }}>
-            <h2>System requirements.</h2>
+            <h2 className="reveal">System requirements.</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '32px', marginTop: '32px' }}>
               <div>
                 <h3 className="f0" style={{ fontSize: '26px', margin: '0 0 10px', color: '#c4b5fd' }}>
@@ -47,13 +54,21 @@ export default function DownloadPage() {
               </div>
             </div>
 
-            <div style={{ marginTop: '48px', padding: '24px', borderRadius: '16px', border: '1px solid var(--line)', background: 'rgba(21, 15, 40, 0.4)' }}>
-              <h3 className="f0" style={{ fontSize: '24px', margin: '0 0 8px' }}>
-                Note regarding Windows SmartScreen
-              </h3>
-              <p style={{ color: 'var(--mut)', fontSize: '14.5px', margin: 0 }}>
-                The v1.0.0 installer is built from open-source code and currently unsigned with an Authenticode certificate. Windows SmartScreen may show a warning dialog on launch. You can verify the file SHA-256 checksum published alongside the GitHub release before proceeding.
-              </p>
+            {/* SmartScreen Note Card */}
+            <div className="smartscreen-card" style={{ marginTop: '48px' }}>
+              <div className="smartscreen-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                  <line x1="12" y1="9" x2="12" y2="13" />
+                  <line x1="12" y1="17" x2="12.01" y2="17" />
+                </svg>
+              </div>
+              <div>
+                <h4 className="smartscreen-title">Notice regarding Windows SmartScreen</h4>
+                <p className="smartscreen-text">
+                  The v1.0.0 installer is built from open-source code and currently unsigned with a paid commercial Authenticode certificate. Windows SmartScreen may show an unrecognized app dialog on launch. You can verify the file SHA-256 checksum published alongside the GitHub release before proceeding.
+                </p>
+              </div>
             </div>
           </div>
         </div>

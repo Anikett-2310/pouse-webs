@@ -13,7 +13,7 @@ export default function HowItWorksPage() {
     <div>
       <section style={{ paddingTop: 'clamp(48px, 8vw, 90px)' }}>
         <div className="wrap">
-          <h2>Pair once. It remembers.</h2>
+          <h2 className="reveal">Pair once. It remembers.</h2>
           <p className="sub">
             Pouse supports two completely independent transport pathways. The PC client arbitrates input ownership so commands never collide.
           </p>
@@ -25,7 +25,7 @@ export default function HowItWorksPage() {
           </div>
 
           <div style={{ marginTop: '80px', borderTop: '1px solid var(--line)', paddingTop: '60px' }}>
-            <h2>Under the hood.</h2>
+            <h2 className="reveal">Under the hood.</h2>
             <p className="sub">
               A single unified JSON protocol bridges native Android event capture and the Windows OS input engine.
             </p>
@@ -56,7 +56,7 @@ export default function HowItWorksPage() {
               </div>
             </div>
 
-            <div style={{ marginTop: '60px', padding: '32px', borderRadius: '24px', background: 'rgba(18, 12, 36, 0.6)', border: '1px solid var(--line)', maxWidth: '960px' }}>
+            <div className="glass-card reveal" style={{ marginTop: '60px', padding: '32px', borderRadius: '24px', maxWidth: '960px' }}>
               <h3 className="f0" style={{ fontSize: '30px', margin: '0 0 12px' }}>
                 InputOwner: Collision-free arbitration
               </h3>

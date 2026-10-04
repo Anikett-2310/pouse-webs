@@ -84,7 +84,7 @@ export default function TroubleshootingPage() {
     <div>
       <section style={{ paddingTop: 'clamp(48px, 8vw, 90px)' }}>
         <div className="wrap">
-          <h2>Troubleshooting.</h2>
+          <h2 className="reveal">Troubleshooting.</h2>
           <p className="sub">
             Step-by-step diagnostics for network configurations, device discovery, permissions, and monitor controls.
           </p>
