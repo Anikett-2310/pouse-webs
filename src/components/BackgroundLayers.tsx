@@ -1,70 +1,50 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 
 export default function BackgroundLayers() {
-  const orbARef = useRef<HTMLDivElement>(null);
-  const orbBRef = useRef<HTMLDivElement>(null);
-  const orbCRef = useRef<HTMLDivElement>(null);
-  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
     const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    setReducedMotion(isReduced);
     if (isReduced) return;
 
-    let currentY = window.scrollY;
-    let targetY = window.scrollY;
-    let animationFrameId: number;
+    // ── PARALLAX ORBS ──
+    const orbs = [
+      { el: document.getElementById('orb-a'), f: -0.12 },
+      { el: document.getElementById('orb-b'), f: 0.08 },
+      { el: document.getElementById('orb-c'), f: -0.06 },
+    ];
+    let ty = 0;
+    let animId: number;
 
-    const handleScroll = () => {
-      targetY = window.scrollY;
-    };
+    function lerp(a: number, b: number, t: number) {
+      return a + (b - a) * t;
+    }
 
-    const updateParallax = () => {
-      // Lerp with factor 0.08 for silky lagged movement
-      currentY += (targetY - currentY) * 0.08;
+    function tickOrbs() {
+      ty = lerp(ty, window.scrollY, 0.08);
+      orbs.forEach((o) => {
+        if (o.el) {
+          o.el.style.transform = `translateY(${ty * o.f}px)`;
+        }
+      });
+      animId = requestAnimationFrame(tickOrbs);
+    }
 
-      if (orbARef.current) {
-        orbARef.current.style.transform = `translate3d(0, ${currentY * -0.12}px, 0)`;
-      }
-      if (orbBRef.current) {
-        orbBRef.current.style.transform = `translate3d(0, ${currentY * 0.08}px, 0)`;
-      }
-      if (orbCRef.current) {
-        orbCRef.current.style.transform = `translate3d(0, ${currentY * -0.06}px, 0)`;
-      }
-
-      animationFrameId = requestAnimationFrame(updateParallax);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    animationFrameId = requestAnimationFrame(updateParallax);
+    animId = requestAnimationFrame(tickOrbs);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      cancelAnimationFrame(animationFrameId);
+      cancelAnimationFrame(animId);
     };
   }, []);
 
-  if (reducedMotion) {
-    return null;
-  }
-
   return (
-    <div className="bg-layers" aria-hidden="true">
-      {/* Layer 1 — dotted grid (static) */}
-      <div className="bg-layer-grid" />
-
-      {/* Layer 2 — slow drifting orbs (parallax) */}
-      <div className="bg-layer-orbs">
-        <div ref={orbARef} className="bg-orb orb-a" />
-        <div ref={orbBRef} className="bg-orb orb-b" />
-        <div ref={orbCRef} className="bg-orb orb-c" />
-      </div>
-
-      {/* Layer 3 — noise texture (static) */}
-      <div className="bg-layer-noise" />
-    </div>
+    <>
+      <div id="bg-grid" aria-hidden="true" />
+      <div id="bg-noise" aria-hidden="true" />
+      <div className="orb" id="orb-a" aria-hidden="true" />
+      <div className="orb" id="orb-b" aria-hidden="true" />
+      <div className="orb" id="orb-c" aria-hidden="true" />
+    </>
   );
 }

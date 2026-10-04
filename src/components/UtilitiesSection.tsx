@@ -30,56 +30,51 @@ export default function UtilitiesSection() {
     <section className="section-utilities" id="utilities">
       <div className="wrap">
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <div className="eyebrow" style={{ justifyContent: 'center' }}>
-            <span className="num">02</span>
-            <span className="label">COMPANION TOOLS</span>
-          </div>
+          <span className="eyebrow" style={{ textAlign: 'center', display: 'block' }}>
+            <b>02</b> Companion Tools
+          </span>
           <h2 className="reveal" style={{ maxWidth: '100%', margin: '0 auto 16px', fontWeight: 800 }}>
-            Utilities & Instant Shortcuts
+            Utilities &amp; Instant Shortcuts
           </h2>
-          <p className="sub" style={{ margin: '0 auto', maxWidth: '38em' }}>
+          <p className="sub reveal" style={{ margin: '0 auto 48px', maxWidth: '38em' }}>
             Utility controls live in a collapsible bar at the top of your mobile screen, keeping essential PC actions at your fingertips without switching modes.
           </p>
         </div>
 
-        {/* Zigzag Scrolling Pills Marquee (Row 1 Left->Right, Row 2 Right->Left) */}
-        <div className="zigzag-marquee-container" aria-label="Quick shortcut pills">
-          {/* Row 1: Forward (Left to Right) */}
-          <div className="zigzag-row">
-            <div className="zigzag-track zigzag-forward">
+        {/* Marquee Wrap from reference */}
+        <div className="marquee-wrap reveal" aria-label="Quick shortcut pills">
+          {/* Row 1: Left -> Right */}
+          <div className="marquee-row">
+            <div className="marquee-track" id="r1">
               {/* Set 1 */}
               {ROW_1_PILLS.map((pill, idx) => (
-                <div key={`r1-a-${idx}`} className="pill-item">
-                  <span>{pill.label}</span>
-                  <span className="keycap">{pill.keycap}</span>
-                </div>
+                <span key={`r1-a-${idx}`} className="pill">
+                  {pill.label} <span className="keycap">{pill.keycap}</span>
+                </span>
               ))}
               {/* Set 2 (duplicate for seamless loop) */}
               {ROW_1_PILLS.map((pill, idx) => (
-                <div key={`r1-b-${idx}`} className="pill-item" aria-hidden="true">
-                  <span>{pill.label}</span>
-                  <span className="keycap">{pill.keycap}</span>
-                </div>
+                <span key={`r1-b-${idx}`} className="pill" aria-hidden="true">
+                  {pill.label} <span className="keycap">{pill.keycap}</span>
+                </span>
               ))}
             </div>
           </div>
 
-          {/* Row 2: Backward (Right to Left) */}
-          <div className="zigzag-row">
-            <div className="zigzag-track zigzag-backward">
+          {/* Row 2: Right -> Left (reverse) */}
+          <div className="marquee-row">
+            <div className="marquee-track rev" id="r2">
               {/* Set 1 */}
               {ROW_2_PILLS.map((pill, idx) => (
-                <div key={`r2-a-${idx}`} className="pill-item">
-                  <span>{pill.label}</span>
-                  <span className="keycap">{pill.keycap}</span>
-                </div>
+                <span key={`r2-a-${idx}`} className="pill">
+                  {pill.label} <span className="keycap">{pill.keycap}</span>
+                </span>
               ))}
               {/* Set 2 (duplicate for seamless loop) */}
               {ROW_2_PILLS.map((pill, idx) => (
-                <div key={`r2-b-${idx}`} className="pill-item" aria-hidden="true">
-                  <span>{pill.label}</span>
-                  <span className="keycap">{pill.keycap}</span>
-                </div>
+                <span key={`r2-b-${idx}`} className="pill" aria-hidden="true">
+                  {pill.label} <span className="keycap">{pill.keycap}</span>
+                </span>
               ))}
             </div>
           </div>
@@ -95,7 +90,7 @@ export default function UtilitiesSection() {
                 <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
               </svg>
             </div>
-            <h3>PC Audio & Brightness</h3>
+            <h3>PC Audio &amp; Brightness</h3>
             <p className="card-intro">Directly adjust system parameters from your phone:</p>
             <ul className="card-bullets">
               <li>Volume Up, Volume Down, Volume Mute</li>
@@ -118,7 +113,7 @@ export default function UtilitiesSection() {
             <p className="card-intro">Trigger standard Windows productivity shortcuts:</p>
             <ul className="card-bullets">
               <li>
-                <strong>Task View</strong> <span className="keycap">Win+Tab</span> overview of virtual desktops & windows
+                <strong>Task View</strong> <span className="keycap">Win+Tab</span> overview of virtual desktops &amp; windows
               </li>
               <li>
                 <strong>Taskbar Apps</strong> <span className="keycap">Win+T</span> cycles through pinned taskbar apps
@@ -143,7 +138,7 @@ export default function UtilitiesSection() {
                 <line x1="12" y1="18" x2="12.01" y2="18" />
               </svg>
             </div>
-            <h3>Soft Keyboard & Pairing</h3>
+            <h3>Soft Keyboard &amp; Pairing</h3>
             <p className="card-intro">Quick text entry and connection maintenance:</p>
             <ul className="card-bullets">
               <li>Type full UTF-8 text strings directly into active PC fields</li>
