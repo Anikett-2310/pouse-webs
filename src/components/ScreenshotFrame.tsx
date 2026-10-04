@@ -16,65 +16,70 @@ interface ScreenshotFrameProps {
   alt: string;
   isLandscape?: boolean;
   className?: string;
-  width?: number;
-  height?: number;
+  priority?: boolean;
 }
 
-const VARIANTS: Record<string, { srcSet: string; defaultWidth: number; defaultHeight: number }> = {
+interface ImageMeta {
+  width: number;
+  height: number;
+  srcSet: string;
+}
+
+const META: Record<string, ImageMeta> = {
   'touchpad-mode': {
+    width: 540,
+    height: 928,
     srcSet: '/media/touchpad-mode-360w.webp 360w, /media/touchpad-mode-540w.webp 540w, /media/touchpad-mode-720w.webp 720w',
-    defaultWidth: 720,
-    defaultHeight: 1600,
   },
   'motion-mode': {
+    width: 540,
+    height: 928,
     srcSet: '/media/motion-mode-360w.webp 360w, /media/motion-mode-540w.webp 540w, /media/motion-mode-720w.webp 720w',
-    defaultWidth: 720,
-    defaultHeight: 1600,
   },
   'touchless-mode': {
+    width: 540,
+    height: 906,
     srcSet: '/media/touchless-mode-360w.webp 360w, /media/touchless-mode-540w.webp 540w, /media/touchless-mode-720w.webp 720w',
-    defaultWidth: 720,
-    defaultHeight: 1600,
   },
   'gaming-mode': {
+    width: 540,
+    height: 910,
     srcSet: '/media/gaming-mode-360w.webp 360w, /media/gaming-mode-540w.webp 540w, /media/gaming-mode-720w.webp 720w',
-    defaultWidth: 720,
-    defaultHeight: 324,
   },
   'remote-screen': {
+    width: 540,
+    height: 910,
     srcSet: '/media/remote-screen-360w.webp 360w, /media/remote-screen-540w.webp 540w, /media/remote-screen-720w.webp 720w',
-    defaultWidth: 720,
-    defaultHeight: 1600,
-  },
-  'connect-qr': {
-    srcSet: '/media/connect-qr-360w.webp 360w, /media/connect-qr-540w.webp 540w, /media/connect-qr-720w.webp 720w',
-    defaultWidth: 720,
-    defaultHeight: 1600,
-  },
-  'bluetooth-discovery': {
-    srcSet: '/media/bluetooth-discovery-360w.webp 360w, /media/bluetooth-discovery-540w.webp 540w, /media/bluetooth-discovery-720w.webp 720w',
-    defaultWidth: 720,
-    defaultHeight: 1600,
-  },
-  'pc-tray-menu': {
-    srcSet: '/media/pc-tray-menu-360w.webp 360w, /media/pc-tray-menu-550w.webp 550w',
-    defaultWidth: 550,
-    defaultHeight: 380,
-  },
-  'pc-preferences': {
-    srcSet: '/media/pc-preferences-640w.webp 640w, /media/pc-preferences-960w.webp 960w',
-    defaultWidth: 960,
-    defaultHeight: 680,
-  },
-  'hero-phone': {
-    srcSet: '/media/hero-phone-360w.webp 360w, /media/hero-phone-540w.webp 540w, /media/hero-phone-720w.webp 720w',
-    defaultWidth: 720,
-    defaultHeight: 1600,
   },
   'utilities-dock': {
+    width: 540,
+    height: 910,
     srcSet: '/media/utilities-dock-360w.webp 360w, /media/utilities-dock-540w.webp 540w, /media/utilities-dock-720w.webp 720w',
-    defaultWidth: 720,
-    defaultHeight: 1600,
+  },
+  'connect-qr': {
+    width: 540,
+    height: 906,
+    srcSet: '/media/connect-qr-360w.webp 360w, /media/connect-qr-540w.webp 540w, /media/connect-qr-720w.webp 720w',
+  },
+  'bluetooth-discovery': {
+    width: 540,
+    height: 906,
+    srcSet: '/media/bluetooth-discovery-360w.webp 360w, /media/bluetooth-discovery-540w.webp 540w, /media/bluetooth-discovery-720w.webp 720w',
+  },
+  'hero-phone': {
+    width: 540,
+    height: 928,
+    srcSet: '/media/hero-phone-360w.webp 360w, /media/hero-phone-540w.webp 540w, /media/hero-phone-720w.webp 720w',
+  },
+  'pc-tray-menu': {
+    width: 550,
+    height: 689,
+    srcSet: '/media/pc-tray-menu-360w.webp 360w, /media/pc-tray-menu-550w.webp 550w',
+  },
+  'pc-preferences': {
+    width: 960,
+    height: 644,
+    srcSet: '/media/pc-preferences-640w.webp 640w, /media/pc-preferences-960w.webp 960w',
   },
 };
 
@@ -83,26 +88,32 @@ export default function ScreenshotFrame({
   alt,
   isLandscape = false,
   className = '',
-  width,
-  height,
+  priority = false,
 }: ScreenshotFrameProps) {
-  const variant = VARIANTS[name];
-  const src = `/media/${name}.webp`;
-  const landscape = isLandscape || name === 'gaming-mode' || name === 'pc-preferences' || name === 'pc-tray-menu';
-  const imgWidth = width || variant?.defaultWidth || 720;
-  const imgHeight = height || variant?.defaultHeight || (landscape ? 405 : 1600);
+  const meta = META[name] || { width: 540, height: 928, srcSet: `/media/${name}.webp` };
+  const landscape = isLandscape || name === 'pc-preferences' || name === 'pc-tray-menu';
 
   return (
-    <div className={`phone-frame ${landscape ? 'landscape' : ''} ${className}`}>
+    <div
+      className={`phone-frame ${landscape ? 'landscape' : ''} ${className}`}
+      style={{
+        aspectRatio: `${meta.width} / ${meta.height}`,
+      }}
+    >
       <img
-        src={src}
-        srcSet={variant?.srcSet}
-        sizes={landscape ? '(max-width: 860px) 100vw, 480px' : '(max-width: 860px) 100vw, 360px'}
+        src={`/media/${name}.webp`}
+        srcSet={meta.srcSet}
+        sizes={landscape ? '(max-width: 860px) 100vw, 520px' : '(max-width: 860px) 100vw, 320px'}
         alt={alt}
-        width={imgWidth}
-        height={imgHeight}
-        loading="lazy"
+        width={meta.width}
+        height={meta.height}
+        loading={priority ? 'eager' : 'lazy'}
         decoding="async"
+        style={{
+          width: '100%',
+          height: 'auto',
+          display: 'block',
+        }}
       />
     </div>
   );

@@ -51,6 +51,7 @@ export default function RootLayout({
       className={`${bricolage.variable} ${instrumentSerif.variable} ${figtree.variable} ${jetbrainsMono.variable}`}
     >
       <body>
+        <div className="bg-grid" aria-hidden="true" />
         <ProgressBar />
         <Nav />
         <main>{children}</main>

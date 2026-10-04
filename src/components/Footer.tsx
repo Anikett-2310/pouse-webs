@@ -2,31 +2,133 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer>
+    <footer className="site-footer">
       <div className="wrap">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
-          <Link className="brand" href="/">
-            <img
-              src="/assets/pouse-logo.png"
-              alt="Pouse logo"
-              width={30}
-              height={30}
-            />
-            Pouse
-          </Link>
-          <div style={{ display: 'flex', gap: '18px', flexWrap: 'wrap', fontSize: '14.5px' }}>
-            <Link href="/features" style={{ color: 'var(--mut)' }}>Modes</Link>
-            <Link href="/how-it-works" style={{ color: 'var(--mut)' }}>How it works</Link>
-            <Link href="/download" style={{ color: 'var(--mut)' }}>Download</Link>
-            <Link href="/security" style={{ color: 'var(--mut)' }}>Security</Link>
-            <Link href="/faq" style={{ color: 'var(--mut)' }}>FAQ</Link>
-            <Link href="/troubleshooting" style={{ color: 'var(--mut)' }}>Troubleshooting</Link>
-            <Link href="/about" style={{ color: 'var(--mut)' }}>About</Link>
-            <Link href="/updates" style={{ color: 'var(--mut)' }}>Updates</Link>
+        <div className="footer-top-grid">
+          {/* Brand info column */}
+          <div className="footer-brand-col">
+            <Link className="brand" href="/" style={{ marginBottom: '14px', display: 'inline-flex' }}>
+              <img
+                src="/assets/pouse-logo.png"
+                alt="Pouse logo"
+                width={30}
+                height={30}
+              />
+              <span>Pouse</span>
+              <span className="version-pill">v1.0.0</span>
+            </Link>
+            <p className="footer-desc">
+              Pocket Mouse platform converting an Android phone into a multi-mode wireless input device for Windows 10/11.
+            </p>
+            <p className="footer-telemetry-note">
+              This website and the CLI collect zero telemetry and run no tracking scripts.
+            </p>
+          </div>
+
+          {/* Product links */}
+          <div className="footer-col">
+            <h4>PRODUCT</h4>
+            <ul>
+              <li>
+                <Link href="/features">All 5 Input Modes</Link>
+              </li>
+              <li>
+                <Link href="/how-it-works">How It Works</Link>
+              </li>
+              <li>
+                <Link href="/security">Security & Privacy</Link>
+              </li>
+              <li>
+                <Link href="/download">CLI Tool (pouse-cli)</Link>
+              </li>
+              <li>
+                <Link href="/faq">Frequently Asked Questions</Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Downloads links */}
+          <div className="footer-col">
+            <h4>DOWNLOADS</h4>
+            <ul>
+              <li>
+                <Link href="/download">Download Center</Link>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/Anikett-2310/Pouse/releases/tag/v1.0.0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Windows Desktop Client
+                </a>
+              </li>
+              <li>
+                <span style={{ color: 'var(--dim)' }}>Android Mobile App (soon)</span>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/Anikett-2310/Pouse/releases/tag/v1.0.0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub Release v1.0.0
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Repository links */}
+          <div className="footer-col">
+            <h4>REPOSITORY</h4>
+            <ul>
+              <li>
+                <a
+                  href="https://github.com/Anikett-2310/Pouse"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Source code on GitHub &nearr;
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/Anikett-2310/Pouse/issues"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Issue Tracker &nearr;
+                </a>
+              </li>
+              <li>
+                <Link href="/security">Privacy Policy</Link>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/Anikett-2310/Pouse/blob/main/LICENSE"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  License: MIT
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-        <div className="credit">
-          <span>Made by Aniket. Open source on <a href="https://github.com/Anikett-2310/Pouse" target="_blank" rel="noopener noreferrer">GitHub</a>.</span>
+
+        {/* Bottom copyright bar */}
+        <div className="footer-bottom-bar">
+          <p className="copyright-text">
+            &copy; 2026 Pouse. Windows is a trademark of Microsoft Corporation. Android is a trademark of Google LLC.
+          </p>
+          <a
+            className="author-link"
+            href="https://github.com/Anikett-2310/Pouse"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Anikett-2310/Pouse
+          </a>
         </div>
       </div>
     </footer>

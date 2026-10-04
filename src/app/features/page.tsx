@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import ModeSwitcher from '@/components/ModeSwitcher';
-import UtilityDock from '@/components/UtilityDock';
-import ScreenshotFrame from '@/components/ScreenshotFrame';
+import UtilitiesSection from '@/components/UtilitiesSection';
 
 export const metadata: Metadata = {
   title: 'Modes & Features — Pouse',
@@ -101,53 +100,11 @@ export default function FeaturesPage() {
               </div>
             </div>
           </div>
-
-          <div style={{ marginTop: '80px', borderTop: '1px solid var(--line)', paddingTop: '60px' }}>
-            <h2>The utility dock.</h2>
-            <p className="sub">
-              Available as a header dock across every mode. Control your computer without leaving your current input screen.
-            </p>
-            <UtilityDock />
-
-            <div style={{ marginTop: '48px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
-              <div>
-                <h3 className="f0" style={{ fontSize: '24px', margin: '0 0 8px' }}>Volume & Mute</h3>
-                <p style={{ color: 'var(--mut)', fontSize: '15px' }}>
-                  Dedicated Win32 media keys for volume up, volume down, and one-tap mute.
-                </p>
-              </div>
-              <div>
-                <h3 className="f0" style={{ fontSize: '24px', margin: '0 0 8px' }}>Display brightness</h3>
-                <p style={{ color: 'var(--mut)', fontSize: '15px' }}>
-                  Platform-adaptive adjustment: WMI methods for laptop screens, DDC/CI commands for desktop monitors.
-                </p>
-              </div>
-              <div>
-                <h3 className="f0" style={{ fontSize: '24px', margin: '0 0 8px' }}>Windows navigation</h3>
-                <p style={{ color: 'var(--mut)', fontSize: '15px' }}>
-                  Instant shortcuts for Windows Search (Win+S), Task View (Win+Tab), Show Desktop (Win+D), and Taskbar Apps (Win+T).
-                </p>
-              </div>
-              <div>
-                <h3 className="f0" style={{ fontSize: '24px', margin: '0 0 8px' }}>Soft keyboard</h3>
-                <p style={{ color: 'var(--mut)', fontSize: '15px' }}>
-                  Send typed UTF-8 text directly to the focused Windows window with full keystroke injection.
-                </p>
-              </div>
-            </div>
-
-            <div style={{ marginTop: '48px', maxWidth: '360px' }}>
-              <p style={{ color: 'var(--mut)', fontSize: '14.5px', marginBottom: '12px' }}>
-                Utility dock expanded view:
-              </p>
-              <ScreenshotFrame
-                name="utilities-dock"
-                alt="Pouse utility dock expanded view on phone"
-              />
-            </div>
-          </div>
         </div>
       </section>
+
+      {/* Utilities Section */}
+      <UtilitiesSection />
     </div>
   );
 }
