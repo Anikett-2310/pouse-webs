@@ -17,7 +17,6 @@ export default function Nav() {
             height={30}
           />
           <span>Pouse — The Pocket Mouse</span>
-          <span className="version-pill">v1.0.0</span>
         </Link>
         <div className="links">
           <Link

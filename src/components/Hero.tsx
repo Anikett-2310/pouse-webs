@@ -119,9 +119,9 @@ export default function Hero() {
     }
 
     let p0 = { x: 140, y: 210 };
-    let p1 = { x: 190, y: 150 };
-    let p2 = { x: 230, y: 270 };
-    let p3 = { x: 280, y: 210 };
+    let p1 = { x: 196, y: 150 };
+    let p2 = { x: 244, y: 270 };
+    let p3 = { x: 300, y: 210 };
 
     function measureCoords() {
       if (!devs) return;
@@ -278,7 +278,7 @@ export default function Hero() {
               </div>
 
               {/* Connection SVG with traveling dots */}
-              <svg className="conn-svg" viewBox="0 0 420 420" preserveAspectRatio="none" aria-hidden="true">
+              <svg className="conn-svg" viewBox="0 0 560 420" preserveAspectRatio="none" aria-hidden="true">
                 <defs>
                   <linearGradient id="cg" x1="0" y1="0" x2="1" y2="0">
                     <stop offset="0%" stopColor="#22d3ee" />
@@ -298,9 +298,9 @@ export default function Hero() {
                   </filter>
                 </defs>
                 {/* Base dim path */}
-                <path className="conn-path" id="cp" d="M 140 210 C 190 150, 230 270, 280 210" />
+                <path className="conn-path" id="cp" d="M 140 210 C 196 150, 244 270, 300 210" />
                 {/* Glow path */}
-                <path id="cp-glow" fill="none" stroke="url(#cg)" strokeWidth="2" opacity="0.9" filter="url(#glow-f)" d="M 140 210 C 190 150, 230 270, 280 210" />
+                <path id="cp-glow" fill="none" stroke="url(#cg)" strokeWidth="2" opacity="0.9" filter="url(#glow-f)" d="M 140 210 C 196 150, 244 270, 300 210" />
                 {/* Traveling Dots with IDs d1, d2, d3 */}
                 <circle className="dot" id="d1" fill="url(#dot-grad)" filter="url(#glow-f)" r="5" cx="140" cy="210" />
                 <circle className="dot" id="d2" fill="url(#dot-grad)" filter="url(#glow-f)" r="5" cx="140" cy="210" />
@@ -310,12 +310,56 @@ export default function Hero() {
               {/* Laptop */}
               <div className="laptop">
                 <div className="laptop-screen">
-                  <img
-                    src="/media/pc-tray-menu.webp"
-                    alt="Pouse PC client interface"
-                    width={550}
-                    height={689}
-                  />
+                  {/* Pure CSS-drawn PC desktop UI illustration */}
+                  <div className="pc-desktop" aria-hidden="true">
+                    {/* Subtle center glow */}
+                    <div className="pc-glow" />
+
+                    {/* Window stage */}
+                    <div className="pc-stage">
+                      {/* Window 1 (back window with square accent) */}
+                      <div className="pc-window pc-window-back">
+                        <div className="pc-win-titlebar">
+                          <div className="pc-win-dots">
+                            <span className="pc-win-dot" />
+                            <span className="pc-win-dot" />
+                          </div>
+                        </div>
+                        <div className="pc-win-content">
+                          <div className="pc-win-square" />
+                        </div>
+                      </div>
+
+                      {/* Window 2 (front window with text lines) */}
+                      <div className="pc-window pc-window-front">
+                        <div className="pc-win-titlebar">
+                          <div className="pc-win-dots">
+                            <span className="pc-win-dot" />
+                            <span className="pc-win-dot" />
+                          </div>
+                        </div>
+                        <div className="pc-win-content">
+                          <div className="pc-win-line" style={{ width: '75%' }} />
+                          <div className="pc-win-line" style={{ width: '55%' }} />
+                          <div className="pc-win-line" style={{ width: '80%' }} />
+                          <div className="pc-win-line" style={{ width: '40%' }} />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Taskbar strip at bottom */}
+                    <div className="pc-taskbar">
+                      <div className="pc-tb-left">
+                        <span className="pc-tb-icon" style={{ background: '#8b5cf6' }} />
+                        <span className="pc-tb-icon" style={{ background: '#e879f9' }} />
+                        <span className="pc-tb-icon" style={{ background: '#a78bfa' }} />
+                        <span className="pc-tb-icon" style={{ background: '#22d3ee' }} />
+                      </div>
+                      <div className="pc-tb-right">
+                        <span className="pc-tb-clock" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="laptop-base" aria-hidden="true">
                   <div className="laptop-notch"></div>

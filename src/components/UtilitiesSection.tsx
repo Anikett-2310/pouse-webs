@@ -41,8 +41,8 @@ export default function UtilitiesSection() {
           </p>
         </div>
 
-        {/* Marquee Wrap from reference */}
-        <div className="marquee-wrap reveal" aria-label="Quick shortcut pills">
+        {/* Marquee container */}
+        <div className="marquee-container" aria-label="Quick shortcut pills">
           {/* Row 1: Left -> Right */}
           <div className="marquee-row">
             <div className="marquee-track" id="r1">
