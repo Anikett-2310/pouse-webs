@@ -1373,12 +1373,35 @@ h2 {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  user-select: none;
 }
 
 .dot-red { background: #ff5f57; }
 .dot-yellow { background: #febc2e; }
 .dot-green { background: #28c840; }
+
+.dot-glyph {
+  font-size: 8px;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.terminal-dots:hover .dot-glyph,
+.terminal-dots .dot:hover .dot-glyph {
+  opacity: 1;
+}
 
 .terminal-title {
   flex: 1;

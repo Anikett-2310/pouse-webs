@@ -167,9 +167,15 @@ export default function TerminalSection({ showSecondary = false }: TerminalSecti
               {/* Window Title Bar */}
               <div className="terminal-titlebar">
                 <div className="terminal-dots" aria-hidden="true">
-                  <span className="dot dot-red" />
-                  <span className="dot dot-yellow" />
-                  <span className="dot dot-green" />
+                  <span className="dot dot-red">
+                    <span className="dot-glyph">×</span>
+                  </span>
+                  <span className="dot dot-yellow">
+                    <span className="dot-glyph">−</span>
+                  </span>
+                  <span className="dot dot-green">
+                    <span className="dot-glyph">⤢</span>
+                  </span>
                 </div>
                 <div className="terminal-title">
                   Windows Terminal (PowerShell / Command Prompt)
@@ -232,9 +238,15 @@ export default function TerminalSection({ showSecondary = false }: TerminalSecti
                 <div className="terminal-window reveal" role="region" aria-label="Static CLI Reference Commands">
                   <div className="terminal-titlebar">
                     <div className="terminal-dots" aria-hidden="true">
-                      <span className="dot dot-red" />
-                      <span className="dot dot-yellow" />
-                      <span className="dot dot-green" />
+                      <span className="dot dot-red">
+                        <span className="dot-glyph">×</span>
+                      </span>
+                      <span className="dot dot-yellow">
+                        <span className="dot-glyph">−</span>
+                      </span>
+                      <span className="dot dot-green">
+                        <span className="dot-glyph">⤢</span>
+                      </span>
                     </div>
                     <div className="terminal-title">Windows Terminal (Update &amp; Removal)</div>
                   </div>
