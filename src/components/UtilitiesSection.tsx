@@ -41,42 +41,35 @@ export default function UtilitiesSection() {
           </p>
         </div>
 
-        {/* Marquee container */}
-        <div className="marquee-container" aria-label="Quick shortcut pills">
-          {/* Row 1: Left -> Right */}
-          <div className="marquee-row">
-            <div className="marquee-track" id="r1">
-              {/* Set 1 */}
-              {ROW_1_PILLS.map((pill, idx) => (
-                <span key={`r1-a-${idx}`} className="pill">
-                  {pill.label} <span className="keycap">{pill.keycap}</span>
-                </span>
-              ))}
-              {/* Set 2 (duplicate for seamless loop) */}
-              {ROW_1_PILLS.map((pill, idx) => (
-                <span key={`r1-b-${idx}`} className="pill" aria-hidden="true">
-                  {pill.label} <span className="keycap">{pill.keycap}</span>
-                </span>
-              ))}
-            </div>
+        {/* Row 1 */}
+        <div className="marquee-outer" aria-label="Quick shortcut pills">
+          <div className="marquee-track">
+            {ROW_1_PILLS.map((pill, idx) => (
+              <span key={`r1-a-${idx}`} className="pill">
+                {pill.label} <span className="keycap">{pill.keycap}</span>
+              </span>
+            ))}
+            {ROW_1_PILLS.map((pill, idx) => (
+              <span key={`r1-b-${idx}`} className="pill" aria-hidden="true">
+                {pill.label} <span className="keycap">{pill.keycap}</span>
+              </span>
+            ))}
           </div>
+        </div>
 
-          {/* Row 2: Right -> Left (reverse) */}
-          <div className="marquee-row">
-            <div className="marquee-track rev" id="r2">
-              {/* Set 1 */}
-              {ROW_2_PILLS.map((pill, idx) => (
-                <span key={`r2-a-${idx}`} className="pill">
-                  {pill.label} <span className="keycap">{pill.keycap}</span>
-                </span>
-              ))}
-              {/* Set 2 (duplicate for seamless loop) */}
-              {ROW_2_PILLS.map((pill, idx) => (
-                <span key={`r2-b-${idx}`} className="pill" aria-hidden="true">
-                  {pill.label} <span className="keycap">{pill.keycap}</span>
-                </span>
-              ))}
-            </div>
+        {/* Row 2 */}
+        <div className="marquee-outer" style={{ marginTop: '10px' }}>
+          <div className="marquee-track rev">
+            {ROW_2_PILLS.map((pill, idx) => (
+              <span key={`r2-a-${idx}`} className="pill">
+                {pill.label} <span className="keycap">{pill.keycap}</span>
+              </span>
+            ))}
+            {ROW_2_PILLS.map((pill, idx) => (
+              <span key={`r2-b-${idx}`} className="pill" aria-hidden="true">
+                {pill.label} <span className="keycap">{pill.keycap}</span>
+              </span>
+            ))}
           </div>
         </div>
 

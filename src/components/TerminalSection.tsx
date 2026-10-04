@@ -180,11 +180,7 @@ export default function TerminalSection({ showSecondary = false }: TerminalSecti
                   onClick={handleCopy}
                   aria-label="Copy terminal commands to clipboard"
                 >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                  </svg>
-                  <span>{copied ? 'Copied ✓' : 'Copy'}</span>
+                  {copied ? 'Copied ✓' : 'Copy'}
                 </button>
               </div>
 
@@ -222,8 +218,8 @@ export default function TerminalSection({ showSecondary = false }: TerminalSecti
 
               {/* Footer Strip */}
               <div className="terminal-footer">
-                <span className="terminal-req">Requirements: Windows 10/11 &bull; Node.js &gt;= 22</span>
-                <span className="terminal-path">Default installer path: AppData\Local\Programs\Pouse</span>
+                <span className="terminal-req">Windows 10/11 · Node.js required</span>
+                <span className="terminal-path">AppData\Local\Programs\Pouse</span>
               </div>
             </div>
 
