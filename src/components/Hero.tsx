@@ -50,7 +50,21 @@ export default function Hero() {
 
     tickType();
 
+    const devs = document.getElementById('devices');
+    const devWrap = document.getElementById('dev-wrap');
+    const devGlow = document.getElementById('dev-glow');
+    const dots = [
+      { el: document.getElementById('d1'), offset: 0 },
+      { el: document.getElementById('d2'), offset: 0.33 },
+      { el: document.getElementById('d3'), offset: 0.66 },
+    ];
+
     if (isReduced) {
+      dots.forEach((d) => {
+        if (d.el) d.el.style.display = 'none';
+      });
+      if (devWrap) devWrap.style.transform = 'none';
+      if (devGlow) devGlow.style.transform = 'translate(-50%, -50%)';
       return () => {
         if (typeTimer) clearTimeout(typeTimer);
       };
@@ -61,9 +75,6 @@ export default function Hero() {
     }
 
     // ── 2. DEVICE TILT ──
-    const devs = document.getElementById('devices');
-    const devWrap = document.getElementById('dev-wrap');
-    const devGlow = document.getElementById('dev-glow');
     let cx = 0,
       cy = 0,
       tx2 = 0,
@@ -107,11 +118,58 @@ export default function Hero() {
       return u * u * u * p0 + 3 * u * u * t * p1 + 3 * u * t * t * p2 + t * t * t * p3;
     }
 
-    const dots = [
-      { el: document.getElementById('d1'), offset: 0 },
-      { el: document.getElementById('d2'), offset: 0.33 },
-      { el: document.getElementById('d3'), offset: 0.66 },
-    ];
+    let p0 = { x: 140, y: 210 };
+    let p1 = { x: 190, y: 150 };
+    let p2 = { x: 230, y: 270 };
+    let p3 = { x: 280, y: 210 };
+
+    function measureCoords() {
+      if (!devs) return;
+      const phone = devs.querySelector<HTMLElement>('.phone');
+      const laptop = devs.querySelector<HTMLElement>('.laptop');
+      if (!phone || !laptop) return;
+
+      const dRect = devs.getBoundingClientRect();
+      const pRect = phone.getBoundingClientRect();
+      const lRect = laptop.getBoundingClientRect();
+
+      if (dRect.width === 0 || pRect.width === 0 || lRect.width === 0) return;
+
+      // Phone right-center relative to devs container
+      const x0 = pRect.right - dRect.left;
+      const y0 = pRect.top - dRect.top + pRect.height / 2;
+
+      // Laptop left-center relative to devs container
+      const x3 = lRect.left - dRect.left;
+      const y3 = lRect.top - dRect.top + lRect.height / 2;
+
+      // S-curve intermediate control points
+      const dx = x3 - x0;
+      const p1x = x0 + dx * 0.35;
+      const p1y = y0 - 60;
+      const p2x = x0 + dx * 0.65;
+      const p2y = y3 + 60;
+
+      p0 = { x: x0, y: y0 };
+      p1 = { x: p1x, y: p1y };
+      p2 = { x: p2x, y: p2y };
+      p3 = { x: x3, y: y3 };
+
+      const dStr = `M ${x0.toFixed(1)} ${y0.toFixed(1)} C ${p1x.toFixed(1)} ${p1y.toFixed(1)}, ${p2x.toFixed(1)} ${p2y.toFixed(1)}, ${x3.toFixed(1)} ${y3.toFixed(1)}`;
+      const cp = document.getElementById('cp');
+      const cpglow = document.getElementById('cp-glow');
+      if (cp) cp.setAttribute('d', dStr);
+      if (cpglow) cpglow.setAttribute('d', dStr);
+
+      const svg = devs.querySelector<SVGSVGElement>('.conn-svg');
+      if (svg) {
+        svg.setAttribute('viewBox', `0 0 ${dRect.width.toFixed(1)} ${dRect.height.toFixed(1)}`);
+      }
+    }
+
+    measureCoords();
+    window.addEventListener('resize', measureCoords);
+
     const DUR = 2400;
     let dotsAnimId: number;
 
@@ -122,10 +180,13 @@ export default function Hero() {
         const t = (now / DUR + d.offset) % 1;
         // ease-in-out
         const e = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-        const x = cubicBez(145, 200, 240, 295, e);
-        const y = cubicBez(145, 80, 210, 145, e);
-        d.el.setAttribute('cx', x.toString());
-        d.el.setAttribute('cy', y.toString());
+        const x = cubicBez(p0.x, p1.x, p2.x, p3.x, e);
+        const y = cubicBez(p0.y, p1.y, p2.y, p3.y, e);
+        d.el.setAttribute('cx', x.toFixed(1));
+        d.el.setAttribute('cy', y.toFixed(1));
+        // 4-7px radius that pulses
+        const r = 4 + 3 * Math.sin(t * Math.PI);
+        d.el.setAttribute('r', r.toFixed(1));
       });
       dotsAnimId = requestAnimationFrame(tickDots);
     }
@@ -136,6 +197,7 @@ export default function Hero() {
       if (typeTimer) clearTimeout(typeTimer);
       cancelAnimationFrame(tiltAnimId);
       cancelAnimationFrame(dotsAnimId);
+      window.removeEventListener('resize', measureCoords);
       if (devs) {
         devs.removeEventListener('pointermove', handlePointerMove);
         devs.removeEventListener('pointerleave', handlePointerLeave);
@@ -145,6 +207,9 @@ export default function Hero() {
 
   return (
     <section className="hero">
+      {/* Spotlight behind headline */}
+      <div className="hero-spotlight" aria-hidden="true" />
+
       <div className="wrap">
         <div className="hero-inner">
           {/* Left Column */}
@@ -213,14 +278,18 @@ export default function Hero() {
               </div>
 
               {/* Connection SVG with traveling dots */}
-              <svg className="conn-svg" viewBox="0 0 420 290" preserveAspectRatio="none" aria-hidden="true">
+              <svg className="conn-svg" viewBox="0 0 420 420" preserveAspectRatio="none" aria-hidden="true">
                 <defs>
-                  <linearGradient id="cg" x1="0" x2="1">
-                    <stop offset="0" stopColor="#22d3ee" />
-                    <stop offset="0.5" stopColor="#a78bfa" />
-                    <stop offset="1" stopColor="#f0abfc" />
+                  <linearGradient id="cg" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stopColor="#22d3ee" />
+                    <stop offset="50%" stopColor="#a78bfa" />
+                    <stop offset="100%" stopColor="#f0abfc" />
                   </linearGradient>
-                  <filter id="glow-f">
+                  <linearGradient id="dot-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#c4b5fd" />
+                    <stop offset="100%" stopColor="#f0abfc" />
+                  </linearGradient>
+                  <filter id="glow-f" x="-50%" y="-50%" width="200%" height="200%">
                     <feGaussianBlur stdDeviation="3" result="b" />
                     <feMerge>
                       <feMergeNode in="b" />
@@ -229,13 +298,13 @@ export default function Hero() {
                   </filter>
                 </defs>
                 {/* Base dim path */}
-                <path className="conn-path" id="cp" d="M 145 145 C 200 80, 240 210, 295 145" />
+                <path className="conn-path" id="cp" d="M 140 210 C 190 150, 230 270, 280 210" />
                 {/* Glow path */}
-                <path fill="none" stroke="url(#cg)" strokeWidth="2" opacity="0.9" filter="url(#glow-f)" d="M 145 145 C 200 80, 240 210, 295 145" />
+                <path id="cp-glow" fill="none" stroke="url(#cg)" strokeWidth="2" opacity="0.9" filter="url(#glow-f)" d="M 140 210 C 190 150, 230 270, 280 210" />
                 {/* Traveling Dots with IDs d1, d2, d3 */}
-                <circle className="dot" id="d1" fill="#c4b5fd" filter="url(#glow-f)" cx="145" cy="145" />
-                <circle className="dot" id="d2" fill="#e879f9" filter="url(#glow-f)" cx="145" cy="145" />
-                <circle className="dot" id="d3" fill="#67e8f9" filter="url(#glow-f)" cx="145" cy="145" />
+                <circle className="dot" id="d1" fill="url(#dot-grad)" filter="url(#glow-f)" r="5" cx="140" cy="210" />
+                <circle className="dot" id="d2" fill="url(#dot-grad)" filter="url(#glow-f)" r="5" cx="140" cy="210" />
+                <circle className="dot" id="d3" fill="url(#dot-grad)" filter="url(#glow-f)" r="5" cx="140" cy="210" />
               </svg>
 
               {/* Laptop */}

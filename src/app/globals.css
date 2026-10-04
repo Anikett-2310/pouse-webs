@@ -303,7 +303,20 @@ nav .btn {
 .hero {
   padding: clamp(60px, 12vw, 160px) 0 clamp(80px, 10vw, 130px);
   position: relative;
-  overflow: visible;
+  overflow: hidden;
+}
+
+.hero-spotlight {
+  position: absolute;
+  top: -100px;
+  left: -200px;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(139, 92, 246, 0.18), transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .hero-inner {
@@ -507,6 +520,7 @@ h1 .typed {
   height: 100%;
   pointer-events: none;
   overflow: visible;
+  z-index: 10;
 }
 
 .conn-path {
@@ -520,18 +534,28 @@ h1 .typed {
   r: 5;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .dot,
+  #d1,
+  #d2,
+  #d3 {
+    display: none !important;
+  }
+}
+
 /* glow behind devices */
 .dev-glow {
   position: absolute;
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(139, 92, 246, 0.22), transparent 72%);
-  filter: blur(40px);
+  background: radial-gradient(closest-side, rgba(139, 92, 246, 0.35), rgba(232, 121, 249, 0.12) 55%, transparent 72%);
+  filter: blur(60px);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
+  z-index: 0;
   will-change: transform;
   transition: transform 0.15s ease-out;
 }
@@ -541,6 +565,9 @@ h1 .typed {
     grid-template-columns: 1fr;
   }
   .laptop {
+    display: none;
+  }
+  .conn-svg {
     display: none;
   }
   .devices {
