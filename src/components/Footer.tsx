@@ -48,7 +48,13 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <span className="footer-dim-item">Android Mobile App (coming soon)</span>
+                <a
+                  href="https://github.com/Anikett-2310/Pouse/releases/latest"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Android Mobile App — Available on GitHub Releases
+                </a>
               </li>
               <li>
                 <a
